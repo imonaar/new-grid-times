@@ -6,6 +6,8 @@ import { MARKET_DATA, SPORTS_STORIES } from '../../data';
 import MarketCard from '../MarketCard';
 import SectionTitle from '../SectionTitle';
 import MiniStory from '../MiniStory';
+import { QUERIES } from '../../constants';
+
 
 const SpecialtyStoryGrid = () => {
   return (
@@ -25,6 +27,7 @@ const SpecialtyStoryGrid = () => {
           ))}
         </MarketCards>
       </MarketsSection>
+
       <SportsSection>
         <SectionTitle
           cornerLink={{
@@ -34,6 +37,7 @@ const SpecialtyStoryGrid = () => {
         >
           Sports
         </SectionTitle>
+
         <SportsStories>
           {SPORTS_STORIES.map((data) => (
             <MiniStory key={data.id} {...data} />
@@ -47,14 +51,45 @@ const SpecialtyStoryGrid = () => {
 const Wrapper = styled.div`
   display: grid;
   gap: 48px;
+
+  @media ${QUERIES.laptopAndUp}{
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
 `;
 
-const MarketsSection = styled.section``;
+const MarketsSection = styled.section`
+  @media ${QUERIES.laptopAndUp}{
+    padding-right: 16px;
+    border-right: 1px solid #D0CDC8;
+  }
+`;
 
-const MarketCards = styled.div``;
+const MarketCards = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(183px, 100%), 1fr));
+  gap: 1rem;
+`;
 
-const SportsSection = styled.section``;
+const SportsSection = styled.section`
+  display: grid;
+  gap: 1rem;
 
-const SportsStories = styled.div``;
+  @media ${QUERIES.laptopAndUp}{
+    padding-left: 16px;
+  }
+`;
+
+const SportsStories = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(183px, 100%), 1fr));
+  gap: 1rem;
+
+  @media ${QUERIES.tabletAndUp}{
+    grid-template-columns: repeat(5, minmax(220px, 1fr));
+    overflow: auto;
+    padding-bottom: 1rem;
+  }
+`;
 
 export default SpecialtyStoryGrid;
